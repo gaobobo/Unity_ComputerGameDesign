@@ -487,9 +487,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1224940454}
-  Wall1: {fileID: 1712554168866329054, guid: 3d16c57d4426d1544bce78b898edcd41, type: 3}
-  Wall2: {fileID: 8084992625430690594, guid: 9c5a1d7432022c7418f9577cca8c17b2, type: 3}
-  Wall3: {fileID: 4162287837116566742, guid: b4947bb3795b6fd46ac8358c7584b9e8, type: 3}
+  Wall1: {fileID: 1712554168866329054, guid: 6aadf3796efba8f418b15ce6a4de3aef, type: 3}
+  Wall2: {fileID: 8084992625430690594, guid: 69d0ad16632bdc64da81902c1993d49e, type: 3}
+  Wall3: {fileID: 4162287837116566742, guid: da082906c15683f41999d059a3474fb4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
