@@ -100,3 +100,6 @@ ServerData
 
 # ignore rider config
 .idea/
+
+# ignore vscode config
+.vscode/
