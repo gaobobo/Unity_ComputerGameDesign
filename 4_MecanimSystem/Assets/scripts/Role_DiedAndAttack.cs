@@ -7,7 +7,7 @@ public class Role_DiedAndAttack : MonoBehaviour
     public GameObject player;
 
     private float noResponsedTime = 0f;
-    private float speed = 0.01f;
+    private float speed = 10f;
     private bool isDied = false;
 
     private Animator _animator;
