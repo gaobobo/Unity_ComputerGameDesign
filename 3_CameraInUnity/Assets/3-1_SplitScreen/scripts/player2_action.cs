@@ -15,20 +15,20 @@ public class player2_action : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            gameObject.transform.Translate(Vector3.forward * 0.005f);
+            gameObject.transform.Translate(Vector3.forward * (2f * Time.deltaTime));
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            gameObject.transform.Translate(Vector3.back * 0.005f);
+            gameObject.transform.Translate(Vector3.back * (2f * Time.deltaTime));
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            gameObject.transform.Translate(Vector3.left * 0.005f);
+            gameObject.transform.Translate(Vector3.left * (2f * Time.deltaTime));
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            gameObject.transform.Translate(Vector3.right * 0.005f);
+            gameObject.transform.Translate(Vector3.right * (2f * Time.deltaTime));
         }
     }
 }
