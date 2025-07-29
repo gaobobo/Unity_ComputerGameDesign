@@ -37,11 +37,11 @@ public class door_opening : MonoBehaviour
     {
         if (reverse && gameObject.transform.position.x > move_end)
         {
-            gameObject.transform.Translate(move_speed, 0, 0, Space.World);
+            gameObject.transform.Translate(move_speed * Time.deltaTime, 0, 0, Space.World);
         }
         else if (!reverse && gameObject.transform.position.x < move_end)
         {
-            gameObject.transform.Translate(move_speed, 0, 0, Space.World);
+            gameObject.transform.Translate(move_speed * Time.deltaTime, 0, 0, Space.World);
         }
 
     }
@@ -50,11 +50,11 @@ public class door_opening : MonoBehaviour
     {
         if (reverse && gameObject.transform.position.x < init_position_x)
         {
-            gameObject.transform.Translate(-move_speed, 0, 0, Space.World);
+            gameObject.transform.Translate(-move_speed * Time.deltaTime, 0, 0, Space.World);
         }
         else if (!reverse && gameObject.transform.position.x > init_position_x)
         {
-            gameObject.transform.Translate(-move_speed, 0, 0, Space.World);
+            gameObject.transform.Translate(-move_speed * Time.deltaTime, 0, 0, Space.World);
         }
     }
 }

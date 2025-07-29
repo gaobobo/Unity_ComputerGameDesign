@@ -43,11 +43,11 @@ public class enemy_controller : MonoBehaviour
                 gameObject.transform.position = Vector3.MoveTowards(
                                                 gameObject.transform.position,
                                                 player.transform.position,
-                                                following_speed);
+                                                following_speed * Time.deltaTime);
                 gameObject.transform.rotation = Quaternion.RotateTowards(
                                                 gameObject.transform.rotation,
                                                 Quaternion.LookRotation(target_position), 
-                                                rotation_speed);
+                                                rotation_speed * Time.deltaTime);
 
                 yield return new WaitForEndOfFrame();
             }
