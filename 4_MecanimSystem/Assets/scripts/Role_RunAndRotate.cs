@@ -9,7 +9,7 @@ public class Role_RunAndRotate : MonoBehaviour
     public GameObject player;
 
     private float noResponsedTime = 0f;
-    private float speed = 0.01f;
+    private float speed = 10f;
     private Animator _animator;
 
     // Start is called before the first frame update
@@ -31,12 +31,12 @@ public class Role_RunAndRotate : MonoBehaviour
         _animator.SetBool("isWalkUpend", verticalKey < 0);
         _animator.SetFloat("walkSpeed", System.Math.Abs(verticalKey));
 
-        player.transform.Translate(Vector3.forward * (verticalKey * speed));
+        player.transform.Translate(Vector3.forward * (verticalKey * speed * Time.deltaTime));
 
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")
             || _animator.GetCurrentAnimatorStateInfo(0).IsName("UpendWalk")) 
         {
-            player.transform.Rotate(Vector3.up * (HorizontalKey * speed * 10));
+            player.transform.Rotate(Vector3.up * (HorizontalKey * speed * 10 * Time.deltaTime));
         }
 
     }
