@@ -31,13 +31,13 @@ public class hole : MonoBehaviour
             if (i == 0)
             {
                 delta_time = Random.Range(1, 10);
-                yield return new WaitForSeconds(delta_time);
+                yield return new WaitForSeconds(delta_time * Time.deltaTime);
             }
 
             GameObject g = Instantiate(mouseObj);
             g.transform.position = position;
             delta_time = Random .Range(5,20);
-            yield return new WaitForSeconds(delta_time);
+            yield return new WaitForSeconds(delta_time * Time.deltaTime);
         }
 
     }
