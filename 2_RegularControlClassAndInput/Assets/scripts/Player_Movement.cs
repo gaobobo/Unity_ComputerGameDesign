@@ -11,7 +11,7 @@ public class Player_Movement : MonoBehaviour
     public GameObject Wall2;
     public GameObject Wall3;
     private List<GameObject> walls;
-    private float speed = 1f;
+    private float speed = 3f;
     // Start is called before the first frame update
     void Start()
     {
