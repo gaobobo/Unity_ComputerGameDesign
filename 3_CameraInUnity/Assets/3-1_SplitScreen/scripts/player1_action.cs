@@ -15,18 +15,18 @@ public class player1_action : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            gameObject.transform.Translate(Vector3.forward * 0.005f);
+            gameObject.transform.Translate(Vector3.forward * (2f * Time.deltaTime));
         } else if (Input.GetKey(KeyCode.S))
         {
-            gameObject.transform.Translate(Vector3.back * 0.005f);
+            gameObject.transform.Translate(Vector3.back * (2f * Time.deltaTime));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            gameObject.transform.Translate(Vector3.left * 0.005f);
+            gameObject.transform.Translate(Vector3.left * (2f * Time.deltaTime));
         } else if (Input.GetKey(KeyCode.D))
         {
-            gameObject.transform.Translate(Vector3.right * 0.005f);
+            gameObject.transform.Translate(Vector3.right * (2f * Time.deltaTime));
         }
     }
 }
