@@ -9,7 +9,7 @@ public class Role_RunAndRotate : MonoBehaviour
     public GameObject player;
 
     private float noResponsedTime = 0f;
-    private float speed = 0.01f;
+    private float speed = 10f;
     private Animator _animator;
 
     // Start is called before the first frame update
