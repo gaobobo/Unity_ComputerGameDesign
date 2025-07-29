@@ -49,7 +49,7 @@ public class Player_Movement : MonoBehaviour
 
     IEnumerator faster()
     {
-        speed = 3f;
+        speed = 5f;
 
         yield return new WaitForSeconds(5);
 
