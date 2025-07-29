@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Bobby Gao
-  productName: "\u5B9E\u9A8C\u4E00  Unity\u811A\u672C\u7EC3\u4E60-\u6E38\u620F\u7269\u4F53\u7684\u521B\u5EFA\u4E0E\u63A7\u5236"
+  productName: 1_CreateAndControlGameObject
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
