@@ -20,6 +20,8 @@ public class tansSmall : MonoBehaviour
 
     public void onClick()
     {
+        if (obj.transform.localScale.x < 0.5f) return;
+        
         obj.transform.localScale += new Vector3(-1.1f, -1.1f, -1.1f);
     }
 }
