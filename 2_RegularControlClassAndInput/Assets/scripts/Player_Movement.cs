@@ -11,7 +11,7 @@ public class Player_Movement : MonoBehaviour
     public GameObject Wall2;
     public GameObject Wall3;
     private List<GameObject> walls;
-    private float speed = 1f;
+    private float speed = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * -0.005f * speed);
+        transform.Translate(Vector3.forward * -speed *  Time.deltaTime);
 
         if (Input.GetKey(KeyCode.R))
         {
@@ -49,7 +49,7 @@ public class Player_Movement : MonoBehaviour
 
     IEnumerator faster()
     {
-        speed = 3f;
+        speed = 5f;
 
         yield return new WaitForSeconds(5);
 
