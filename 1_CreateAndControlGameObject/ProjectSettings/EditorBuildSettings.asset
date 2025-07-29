@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/1-3_Whac-A-Mole.unity
+    guid: f1347eca9c1e91442934d036f6863bae
   m_configObjects: {}
