@@ -26,8 +26,8 @@ public class player_controller : MonoBehaviour
         
 
         // rigidBody.MovePosition(rigidBody.position + Vector3.forward * move_speed * vertical);
-        gameObject.transform.Translate(Vector3.forward * move_speed * vertical);
-        gameObject.transform.Rotate(Vector3.up * rotate_speed *horizon);
+        gameObject.transform.Translate(Vector3.forward * (move_speed * vertical * Time.deltaTime));
+        gameObject.transform.Rotate(Vector3.up * (rotate_speed * horizon * Time.deltaTime));
     }
 
 }
