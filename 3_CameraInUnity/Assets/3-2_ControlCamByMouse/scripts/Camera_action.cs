@@ -22,7 +22,10 @@ public class Camera_action : MonoBehaviour
 
         if (Input.GetMouseButton(1)) 
         {
-            gameObject.transform.Translate(new Vector3(mouseX * 0.5f, mouseY * 0.5f, 0f));
+            gameObject.transform.Translate(new Vector3(
+                mouseX * 0.5f * Time.deltaTime, 
+                mouseY * 0.5f * Time.deltaTime, 
+                0f));
 
         } else if (mouseScrollWheel != 0)
         {
