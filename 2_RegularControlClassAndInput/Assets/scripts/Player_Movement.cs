@@ -22,7 +22,7 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * -0.005f * speed);
+        transform.Translate(Vector3.forward * -speed *  Time.deltaTime);
 
         if (Input.GetKey(KeyCode.R))
         {
