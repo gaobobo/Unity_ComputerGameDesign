@@ -111,6 +111,11 @@ public class role_player_controller : MonoBehaviour
                 _rigidbody.position + 
                 transform.up * (7f * Time.deltaTime));
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         
     }
 }
