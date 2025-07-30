@@ -126,3 +126,148 @@ flowchart TD
 一个 exe 可执行文件、一个 Data 数据文件夹，两者缺一不可且不可分割。
 
 ![一个 exe 可执行文件、一个 Data 数据文件夹](./.doc/3-4.png)
+
+------
+
+# 第二讲 Unity 脚本-游戏物体创建与操作
+
+## 课程目的
+
+1. Unity3D 脚本基础
+    - 理解Unity3D 中脚本的作用
+    - 掌握脚本的编写方式
+    - 理解脚本和游戏对象的关系
+1. 利用脚本控制游戏对象
+    - 掌握使用脚本控制组件的方法
+    - 创建游戏对象
+    - 获取游戏对象
+    - 克隆游戏对象
+
+## 一、Unity 3D 脚本基础
+
+### 脚本的作用
+
+- 控制游戏对象的行为；
+- 进行三维交互。
+
+### 编写脚本语言
+
+Unity 中脚本语言有：C#、JavaScript 。脚本是文本文件，可以用任
+意的文本编辑器进行编辑。
+
+通过 Edit > Preferences > External Tools 指定编辑工具。
+
+### 新建脚本文件
+
+一个脚本文件默认就是一个类，类的名称就是文件名，每个类都继承自
+`MonoBehaviour`，`MonoBehaviour`是所有脚本的基类。
+
+`MonoBehaviour`类中定义了各种回调方法：
+
+- `Start()`函数能保证在第一次`Update()`被调用前调用；
+- `Awake()`函数：脚本唤醒函数，无论脚本是否处于激活状态，当脚本绑定的游戏对象被激活时调用此函数。
+
+    > [!TIP]
+    >
+    > `Awake()`和`Start()`的区别在于，`Awake()`在加载场景时调用，在`Start()`方法之前，一般初始化的语句放在`Awake()`或者`Start()`中。
+
+- `Update()`函数就是游戏每帧调用的刷新函数；
+- `FixdUpdate()`固定更新函数，当我们需要在固定时间间隔完成一些动作的时候，需要使用此函数；
+- `OnDestory()`：当前脚本销毁的时调用该函数；
+- `OnEnable()`:当脚本激活的时候调用；
+- `OnGUI()`：绘制界面的函数，在每一帧调用，现在一般用于测试功能。
+
+### 绑定脚本
+
+在 Unity 中创建该脚本后，需要绑定到某个`GameObject`中成为一个`Script`的组件（Component）后才能运行。
+每个游戏对象可以绑定多个脚本，一个脚本也可以绑定到多个游戏对象上。
+
+## 二、利用脚本控制游戏对象
+
+### 游戏物体的平移，旋转和缩放
+
+游戏对象的`Transform`组件，主要用于控制物体的旋转、移动、缩放。
+
+- `position`：在世界空间坐标`transform`的位置；
+- `Translate`函数：控制游戏物体位移的函数；
+
+    > [!TIP]
+    >
+    > `transform.Translate()`函数中，前一个变量是物体的移动速度，这里的速度是一个矢量，既包含大小写包含方向；
+    >
+    > 后一个变量是相对坐标系，这里的相对坐标系有两个值，一个是世界坐标，一个是自身坐标，如果第一个坐标不填写的话，默认为自身坐标系。
+    >
+    > 例如：
+    > `gameObject.transform.Translate(new Vector3(0,0.1f,0),Space.World);`
+
+- `Rotate`函数，控制游戏物体的旋转；
+
+    ```csharp
+    gameObject.transform.Rotate(0.0f,10.0f,0.0f,Space.World);
+    ```
+
+- `Transform.RotateAround`围绕旋转；
+
+    围绕世界坐标的`point`点的`axis`旋转该变换`angle`度。
+
+- `transform.localScale`改变游戏物体的缩放比例。
+
+### 访问游戏对象组件
+
+- 添加组件时，用到`AddComponet()`方法；
+- 获取游戏物体的组件时，使用`GetCompoent()`方法。
+
+### 访问其他游戏对象
+
+- 通过属性查看器指定游戏物体
+
+    ```csharp
+    public GameObject obj;
+    ```
+
+- 通过名字或者标签获取游戏物体
+
+    ```csharp
+    obj = GameObject.Find("游戏物体的名称");
+    obj = GameObject.Find("父物体名称/子物体名称/…/游戏物体名称");
+    obj = GameObject.FindWithTag("标签名称");
+    obj = GameObject.FindGameObjectsWithTag("标签名称");
+    ```
+
+- 通过对象的层次关系
+
+    可以通过`Transform`组件获取到子对象或者父对象：
+
+    ```csharp
+    gameObject.Transform.parent.Rotate(1,0,0);
+    gameObject.transform.FindChild ("a").Rotate (10.0f, 0.0f, 0.0f);
+    ```
+
+### 克隆游戏对象（实例化）
+
+克隆游戏对象和创建游戏对象在效果上呈现的方式是完全一样的，但从执行效率上来看，克隆对象的效率要高，类似于在场景中按下`Ctrl`+`D`复制对象。
+
+克隆游戏对象更多通常用于实例投射物（如子弹、榴弹、破片、飞行的铁球等），AI 敌人，粒子爆炸或破坏物体的替代品。
+克隆游戏对象通常和prefab 结合使用。
+
+Prefabs（预设）是最非常用的一种资源类型，是一种可被重复使用的游戏对
+象：
+
+- 特点1：它可以被置入多个场景中，也可以在一个场景中多次置入。
+- 特点2：当你在一个场景中增加一个Prefabs，你就实例化了一个Prefabs。
+- 特点3：所有Prefabs实例都是Prefab的克隆，所以如果实在运行中生成对象会有“Clone”的标记。
+- 特点4：只要Prefabs原型发生改变，所有的Prefabs实例都会产生变化。
+
+#### Prefabs 的用法
+
+如果需要创建一些想要重复使用的东西，就该用它了。使用`Instantiate()`方法克隆游戏对象。
+
+```csharp
+GameObject obj = Instantiate(Prefabsname);
+```
+
+## 小练习
+
+1. 制作两个预制件，一个是cube，一个是sphere
+1. 按下”克隆立方体”按钮，克隆cube
+1. 按下“克隆球体”按钮，克隆sphere
