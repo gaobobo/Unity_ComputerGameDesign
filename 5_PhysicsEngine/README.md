@@ -373,3 +373,195 @@ Variables变量
 >     }
 > }
 > ```
+
+## 五、车轮碰撞器
+
+碰撞体组件定义了物体的物理性状，Unity中有一系列基本碰撞体，我们可以使用它们组合成任意形状，但除了基本碰撞体之外，Untiy还提供了诸如车轮(Wheel)、网格(Mesh)、地形(Terrain)等碰撞器。其中， Wheel Collider用以实现车辆模拟，它可以模拟车辆的前进后退，刹车，转向，打滑等。
+
+### 车轮碰撞器组件的属性
+
+车轮碰撞器组件的参数如下图所示：
+
+![wheel collider](./.doc/5-1.png)
+
+- Mass：车轮的质量大小
+- Radius：车轮的半径大小
+- Wheel Damping Rate:车轮的阻尼值大小，必须要大于0。可以控制车辆抖动，减少震动
+- Suspension Distance：车轮悬挂的最大伸长距离，在局部空间测量。悬架总是通过局部Y轴向下延伸
+- Force App Point Distance：这个参数定义了车轮力的作用点。可以预见从车轮底部静止的部位沿悬挂器方向运动范围。当PrimeAppPosikTosiff= 0时，力将被施加在轮盘底座上。一个更好的车辆将有力量施加在车辆质心以下。
+- Center：中心，设置车轮碰撞体在对象局部坐标的中心
+- Suspension Spring ：悬挂弹簧设置
+- Spring：弹簧，数值越大，弹簧力度越大，弹簧弹得也越快，悬挂到达目标位置的速度越快
+- Damper：阻尼器，数值越大，悬挂弹簧移动速度越慢，起到降低悬挂到达目标速度的作用，当然对减震，平稳也有作用
+- Target Position：目标位置，悬挂沿着其方向上的静止时的距离。其值为0时悬挂为完全伸展状态，值为1时为完全压缩状态，默认值为0，这与常规的汽车悬挂状态相匹配。
+
+其他参数
+
+- Forward Friction：向前摩檫力，当轮胎向前滚动时的摩擦力属性。
+- Extremum Slip：滑动极值。
+- Extmmum Value：极限值。
+- Asymptote Slip：滑动渐进值。
+- Asymptote Value：渐近值。
+- Stiffness：刚性因子。
+- Slidways Friction：侧边摩擦力。当轮胎侧向滚动时的摩擦力属性。
+
+### Wheel Collider API
+
+|   变量   |     描述    |    单位    |
+|:---------|:-----------|:-----------|
+|`motorTorque`|轮轴上的电机扭矩|牛米|
+|`steerAngle`|转向角度|度|
+|`breakTorque`|制动扭矩|牛米|
+|`rpm`|当前轮轴转速|每分钟/转|
+|`forwardFriction`|车轮前进方向上的摩擦||
+|`sidewaysFriction`|车轮侧向上的摩擦||
+|`wheelDampingRate`|车轮的阻尼率，必须大于零||
+
+> **举例：**
+>
+> 车轮碰撞器的使用
+>
+> 步骤：
+>
+> 1. 导入车辆模型，在模型下新建四个空物体，并分别添加wheelCollider。
+>   ![wheelCollider](./.doc/5-2.png)
+> 1. 调整每个wheelCollider正好包裹车轮，如下图所示。
+>   ![wheelCollider](./.doc/5-3.png)
+> 1. 为车辆添加以下代码：
+>
+> ```csharp
+> public class CARControl : MonoBehaviour 
+> { 
+>     public WheelCollider fl, fr, bl, br; 
+>     
+>     // Use this for initialization 
+>     void Start () {} 
+> 
+>     // Update is called once per frame 
+>     void Update () 
+>     { 
+>         if (Input.GetKey (KeyCode.UpArrow)) 
+>         { 
+>             bl.brakeTorque = 0.0f; br.brakeTorque = 0.0f; 
+>             fl.brakeTorque = 0.0f; fr.brakeTorque = 0.0f; 
+>             bl.motorTorque = 3000.0f; br.motorTorque = 3000.0f; 
+>         } 
+>         
+>         if (Input.GetKeyDown (KeyCode.Space)) {
+>             bl.motorTorque = 0.0f; 
+>             br.motorTorque = 0.0f; 
+>             bl.brakeTorque = 3000.0f; 
+>             br.brakeTorque = 3000.0f; 
+>             fl.brakeTorque = 3000.0f;
+>             fr.brakeTorque = 3000.0f; 
+>         } 
+>         
+>         if (Input.GetButton ("Horizontal")) 
+>         { 
+>             fr.steerAngle = 10.0f * Input.GetAxis ("Horizontal"); 
+>             fl.steerAngle = 10.0f * Input.GetAxis ("Horizontal"); 
+>         } 
+>     } 
+> }
+> ```
+
+## 六、粒子系统
+
+通过粒子系统我们可以模拟游戏中的爆炸，水花，瀑布，烟雾，火焰等特效。
+
+### 粒子系统的基本原理
+
+粒子系统是由大量称为粒子的简单体素组成的，这些粒子都有属于自己的一组属性，位置、速度、颜色、大小、生命周期等。每一个粒子都要经历完整的生命周期：产生，运动和死亡。粒子通常在指定的区域又随机过程产生，并不断更新属性，最后死亡。由于粒子的不断运动，使得模拟的场景具有一定的动态性，因此用粒子系统模拟战场烟雾，爆炸以及火焰会有独特的效果。
+
+通常粒子系统模拟自然场景时的基本步骤如下：
+
+1. 产生粒子并初始化属性。根据所要绘制的场景选择产生粒子的位置，数量并对这些粒子进行初始化属性赋值，最后将粒子加入粒子系统中。
+1. 粒子属性的更新。根据模拟物体的运动规律及时更新粒子的运动位置、速度、生命周期等属性。
+1. 将“死亡”粒子从系统中删除。随着粒子属性的不断更新，一些粒子已经达到了自己的生命周期，或者颜色与背景重合，为了提高整个系统的性能，需要将“死亡”粒子从系统中除去。
+1. 绘制图像。对于系统中尚存在的那些粒子，选择一定的绘制算法将其绘制成图像并通过屏幕显示出来。
+
+### 粒子系统的创建
+
+粒子系统有两种创建的方式：
+
+- 可以创建一个粒子系统游戏对象
+- 将粒子系统以组件的形式挂载到场景中的游戏物体上
+
+### 粒子系统的属性
+
+粒子系统由若干模块组成，每一个模块负责不同的功能。
+
+#### 粒子初始化模块
+
+粒子初始化模块对粒子的形态和数量进行设置，设置面板的参数如下：
+
+![particular](./.doc/6-1.png)
+
+- Duration：粒子喷射的周期，粒子在发射多少秒后进入下一个粒子发射周期。
+- Looping：粒子是否循环发射
+- Prewarm：预热系统
+- StartDelay：粒子喷射延迟，勾选后，延长一段时间才发射
+- StartLifeTime：粒子从发生到消失的时间长短
+- StartSpeed：粒子初始发生时的速度
+- StartSize：粒子的初始大小
+- 3DStartSize：粒子的初始大小在某个方向上做比例调整
+- StartRotation：粒子的初始旋转
+- 3DStartRotation：粒子的初始旋转角度，在某个方向上做调整
+- RandomRotation：随即旋转粒子的方向
+- StartColor：粒子的初始颜色
+- SimulationSpace:local粒子会跟随父级物体移动，world粒子不跟随父级物体移动，custom粒子会跟随指定的物体移动
+- SimulationSpeed：根据Update模拟的速度。
+- DeltaTime：一版的DeltaTime都是1，如果需要用到Sacled是在游戏需要暂停的时候，根据TimeManager来定。如果选择UnScale的话，就会忽略时间的影响。
+- ScalingMode：
+  - Local：粒子系统的缩放和自己Transform的一样会忽略父级的缩放。
+  - Hierarchy：粒子缩放跟随父级。
+  - Shape：将粒子系统跟随初始位置，但是不会影响粒子系统的大小。
+- EmitterVelocity：
+  - MaxParticles：粒子系统可以同时存在的最大粒子数量。如果粒子书数量超过最大值粒子系统会销毁一部分粒子。
+  - AutonRandomSeed：随机种子，如果勾选会生成完全不同不重复的粒子效果，如果勾选即为可重复。
+
+#### Emission模块（粒子的喷射）
+
+![Emission模块](./.doc/6-2.png)
+
+- RateOverTime:随单位时间生成粒子的数量，无论父对象如何移动，每秒都会发射所需数量的粒子。
+- RateOverDistance：随着移动距离产生的粒子数量。只有当粒子系统移动时，才发射粒子。
+- Bursts：爆发，允许粒子在指定的时间发射。
+  - Time：爆发的时间（以秒为单位，在粒子系统开始播放之后）
+  - Min：最小粒子数量。
+  - Max：最大的粒子数量，粒子的数量会在Min和Max之间随机。
+  - Cycles：在一个周期中循环的次数。
+  - Interval：两次两次Cycles的间隔时间。
+
+#### Shape发射器形状模块
+
+主要定义粒子的发射器的形状，控制发射方向位等；
+
+![Shape发射器模块](./.doc/6-3.png)
+
+- Shape：发射器的形状。
+- Radius：发射半径。
+- Emit from Shell：从表面发射粒子，还是从内部发射。
+- Radius Thicknes：半径厚度，值为0将从形状的外表面发出。值为1将使用整个卷。之间的值将使用一定比例的体积。
+- Align to Direction：方向对齐，使用这个复选框来确定粒子的初始方向。例如要实现，在碰撞时，汽车的车身油漆脱落效果。
+- Randomize Direction：随机方向，将粒子方向与随机方向混合。当这个设置为0时，这个设置没有效果。当它被设为1时，粒子的方向是完全随机的。
+- Spherize Direction：球面化方向，将粒子方向朝向球形方向，从它们的变换中心向外传播。值为0时无效。当它被设置为1时，粒子方向从中心向外指向（与形状设置为球体时的行为相同）。
+- Randomize Position：随机位置，设置一个值随机移动粒子至此值的位置，值为0时无效，大于1的值都是有效值。
+
+发射器主要形状：
+
+- Sphere：球体发射器
+- HemiSphere：半球体发射器
+- Cone：锥体发射器
+- Box：正方体发射器
+- Mesh：网格发射器
+- Circle：圆形发射器
+- Edge：水平线发射器
+
+以上不同的发射器形状会有一些不同的属性，可以去调节这些属性预览相应的效果。
+
+### 粒子系统案例
+
+火焰特效
+
+![火焰特效](./.doc/6-4.png)
