@@ -23,7 +23,7 @@
 
 ![实验一Unity脚本练习-游戏物体的创建与控制](./.doc/1-3.png)
 
-- <font color=red>Assets: 存放整个项目中用到的所有资源；</font>
+- **Assets: 存放整个项目中用到的所有资源；**
 - Library：库文件；
 - ProjectSetting：项目设置文件；
 - Packages：存放工程里的包配置文件。
