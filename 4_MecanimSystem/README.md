@@ -186,73 +186,69 @@ Animator组件负责把动画分配给GameObject，Animator包含以下两个关
 
     可以使用回调函数：`OnStateEnter();` `OnStateUpdate();` `OnStateMove();` `OnStateIK();`
 
-
 > **案例：**
-> 
+>
 > 使用Animator Controller制作自动播放的动画
-> 
+>
 > 步骤：
 >
 > 1. 为模型建立Avadar；
 > 1. 为模型添加Animator Controller（Asset面板右键 > Create > Animator Controller）；
 > 1. 打开Animator Controller，将Idle动画拖入。
 
-
 > **案例：**
-> 
+>
 > 动画的转移，添加程序控制动画的转移，例如，主角静止时播放Idle动画，当按下按键，人物来回跑动，松开停止
 >
 > 步骤：
-
-
-
-1. 打开Animator Controller，将Run动画拖入；
-1. 在Idle与Run之间添加动画转移（在动画片段图标上右键 > Make Transition）；
-1. 添加控制变量；
-
-    ![添加控制变量](./.doc/2-4.png)
-
-1. 双击状态转移的白色箭头，进行状态转移的设置；
-
-    去掉Has Exit Time的对勾，表示转移不是依赖固定时间。
-    在转移条件conditions中设置转移变量和发生这种转移时转移变量的值。
-
-1. 添加脚本文件，在Update方法中添加如下代码：
-
-    ```csharp
-    void Update () 
-    { 
-        if (Input.GetButton ("Vertical")) 
-        { 
-            animator.SetBool ("run", true); 
-        } 
-        
-        if (Input.GetButtonUp ("Vertical")) 
-            animator.SetBool ("run",false); 
-    }
-    ```
-
-    上面的animator是获取的角色模型的animator组件。
-
-1. 到此为止，动画存在的问题是按向下箭头和s键角色会超前走，下面将通过游戏播放速度的控制实现角色的后退动画；
-
-    ![HumanoidRun](./.doc/2-5.png)
-
-1. 动画的片段里的Speed属性控制动画的播放速度，此值越大，播放速度越快，要实现“后退”其实是动画的倒序播放，将Speed值设置为-1可实现。添加Speed的控制变量runspeed,并在脚本中进行控制：
-
-    ```csharp
-    void Update () 
-    { 
-        if (Input.GetButton ("Vertical")) 
-        { 
-            animator.SetBool ("run", true); 
-            animator.SetFloat ("runspeed", Input.GetAxisRaw ("Vertical"));
-        } 
-        
-        if (Input.GetButtonUp ("Vertical")) 
-            animator.SetBool ("run",false);         
-    }
-    ```
+>
+> 1. 打开Animator Controller，将Run动画拖入；
+> 1. 在Idle与Run之间添加动画转移（在动画片段图标上右键 > Make Transition）；
+> 1. 添加控制变量；
+>
+>     ![添加控制变量](./.doc/2-4.png)
+>
+> 1. 双击状态转移的白色箭头，进行状态转移的设置；
+>
+>     去掉Has Exit Time的对勾，表示转移不是依赖固定时间。
+>     在转移条件conditions中设置转移变量和发生这种转移时转移变量的值。
+>
+> 1. 添加脚本文件，在Update方法中添加如下代码：
+>
+>     ```csharp
+>     void Update () 
+>     { 
+>         if (Input.GetButton ("Vertical")) 
+>         { 
+>             animator.SetBool ("run", true); 
+>         } 
+>         
+>         if (Input.GetButtonUp ("Vertical")) 
+>             animator.SetBool ("run",false); 
+>     }
+>     ```
+>
+>     上面的animator是获取的角色模型的animator组件。
+>
+> 1. 到此为止，动画存在的问题是按向下箭头和s键角色会超前走，下面将通过游戏播放速度的控制实现角色的后退动画；
+>
+>     ![HumanoidRun](./.doc/2-5.png)
+>
+> 1. 动画的片段里的Speed属性控制动画的播放速度，此值越大，播放速度越快，要实现“后退”其实是动画的倒序播放，将Speed值设置为-1可实现。添加Speed的控制变量runspeed,并在脚本中进行控制：
+>
+>     ```csharp
+>     void Update () 
+>     { 
+>         if (Input.GetButton ("Vertical")) 
+>         { 
+>             animator.SetBool ("run", true); 
+>             animator.SetFloat ("runspeed", Input.GetAxisRaw ("Vertical"));
+>         } 
+>         
+>         if (Input.GetButtonUp ("Vertical")) 
+>             animator.SetBool ("run",false);         
+>     }
+>     ```
 
 ### 动画融合树 Blend Tree
 
