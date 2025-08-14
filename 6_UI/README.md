@@ -129,8 +129,6 @@ Text 控件的相关属性：
     U<b>G</b><i>U</i>I<color="yellow">学</color>习
     ```
 
-    U<b>G</b><i>U</i>I<font color="yellow">学</font>习
-
   - Color：字体颜色
 - Paragraph:（段落）
 
