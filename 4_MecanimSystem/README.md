@@ -290,13 +290,13 @@ Animator组件负责把动画分配给GameObject，Animator包含以下两个关
 
 1. 添加paramter控制转移。
 
-```csharp
-if (Input.GetKey (KeyCode.Space)) 
-    player.SetBool ("wave", true); 
+    ```csharp
+    if (Input.GetKey (KeyCode.Space)) 
+        player.SetBool ("wave", true); 
 
-if (Input.GetKeyUp (KeyCode.Space)) 
-    player.SetBool ("wave", false);
-```
+    if (Input.GetKeyUp (KeyCode.Space)) 
+        player.SetBool ("wave", false);
+    ```
 
 ## 四、反向动力学IK
 
