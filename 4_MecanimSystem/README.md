@@ -267,10 +267,10 @@ Animator组件负责把动画分配给GameObject，Animator包含以下两个关
 > 1. 设置控制融合比例的paranater。如上图direction
 > 1. 在脚本中控制parameter
 >
-> ```csharp
-> float h = Input.GetAxis("Horizontal"); 
-> anim.SetFloat("direction",h,0.25f,Time.deltaTime);
-> ```
+>   ```csharp
+>   float h = Input.GetAxis("Horizontal"); 
+>   anim.SetFloat("direction",h,0.25f,Time.deltaTime);
+>   ```
 
 ## 三、动画遮罩
 
