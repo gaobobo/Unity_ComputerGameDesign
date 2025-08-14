@@ -362,7 +362,7 @@ LastUpdate --> ..
 >
 > 巡逻协程：在三个位置之间（🟠）顺序切换巡逻。
 > 
-> <img src="./.doc/1-4.svg" height=350 alt="巡逻协程">
+> <img src="./.doc/1-4.svg" height=200 alt="巡逻协程">
 >
 > ```csharp
 > public class around : MonoBehaviour 
