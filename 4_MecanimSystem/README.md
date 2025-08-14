@@ -314,23 +314,23 @@ Animator.SetIKPositionWeight(AvatarIKGoal goal, float value);
 ```
 
 > **举例：**
-
-```csharp
-void OnAnimatorIK()
-{ 
-    ani.SetIKPositionWeight (AvatarIKGoal.RightHand, 1.0f); 
-    
-    //设置某个骨骼的位置
-    ani.SetIKPosition (AvatarIKGoal.RightHand, obj.transform.position);
-
-    ani.SetIKRotationWeight (AvatarIKGoal.RightHand, 1.0f); 
-    
-    //设置某个骨骼的旋转位置    
-    ani.SetIKRotation (AvatarIKGoal.RightHand, obj.transform.rotation);
-
-    ani.SetLookAtWeight (1); 
-    
-    //头部看向的位置
-    ani.SetLookAtPosition (obj.transform.position); 
-}
-```
+>
+> ```csharp
+> void OnAnimatorIK()
+> { 
+>     ani.SetIKPositionWeight (AvatarIKGoal.RightHand, 1.0f); 
+>     
+>     //设置某个骨骼的位置
+>     ani.SetIKPosition (AvatarIKGoal.RightHand, obj.transform.position);
+> 
+>     ani.SetIKRotationWeight (AvatarIKGoal.RightHand, 1.0f); 
+>     
+>     //设置某个骨骼的旋转位置    
+>     ani.SetIKRotation (AvatarIKGoal.RightHand, obj.transform.rotation);
+> 
+>     ani.SetLookAtWeight (1); 
+>     
+>     //头部看向的位置
+>     ani.SetLookAtPosition (obj.transform.position); 
+> }
+> ```
