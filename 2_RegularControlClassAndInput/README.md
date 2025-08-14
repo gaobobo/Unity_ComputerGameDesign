@@ -185,15 +185,15 @@ gameObject.transform.position = Vector3.Lerp (gameObject.transform.position, obj
 
 1. `Time.fixedTime`：只读参数，返回从游戏启动到现在以固定频率更新的时间。也是每次执行`fixedUpdate()`函数的时间间隔。
 
-    > [!TIP]
-    >
-    > **`UpDate()`与`FixedUpdate()`的区别**
-    >
-    > 因为`Update()`受当前渲染的物体，更确切的说是三角形的数量影响，有时快有时慢，帧率会变化，`Update()`被调用的时间间隔就发生变化。
-    >
-    > 但是`FixedUpdate()`则不受帧率的变化，它是以固定的时间间隔来被调用，这个时间间隔可以通过如下方法设置：“Edit->Project Setting->time”下面的“Fixed timestep”。
+> [!TIP]
+>
+> **`UpDate()`与`FixedUpdate()`的区别**
+>
+> 因为`Update()`受当前渲染的物体，更确切的说是三角形的数量影响，有时快有时慢，帧率会变化，`Update()`被调用的时间间隔就发生变化。
+>
+> 但是`FixedUpdate()`则不受帧率的变化，它是以固定的时间间隔来被调用，这个时间间隔可以通过如下方法设置：“Edit->Project Setting->time”下面的“Fixed timestep”。
 
-1. `Time.fixeddeltaTime`：固定频率更新时，相邻两帧的时间间隔。
+6. `Time.fixeddeltaTime`：固定频率更新时，相邻两帧的时间间隔。
 
 ### `Random`随机数类
 
