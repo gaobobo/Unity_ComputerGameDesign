@@ -231,23 +231,22 @@ Toggle 组件有几个重要的属性：
 >
 > ![Difficulty Selection](./.doc/3-6.png)
 >
-
-```csharp
-void Update () 
-{
-    if (panel.activeSelf) 
-    {
-        if (hard.isOn)
-            info_txt = "地狱";
-        if (custom.isOn)
-            info_txt = "普通";
-        if (simple.isOn)
-            info_txt = "简单";
-
-        info.text = "您选择的难度是" + info_txt;
-    }
-}
-```
+> ```csharp
+> void Update () 
+> {
+>     if (panel.activeSelf) 
+>     {
+>         if (hard.isOn)
+>             info_txt = "地狱";
+>         if (custom.isOn)
+>             info_txt = "普通";
+>         if (simple.isOn)
+>             info_txt = "简单";
+> 
+>         info.text = "您选择的难度是" + info_txt;
+>     }
+> }
+> ```
 
 ### Slider控件
 
