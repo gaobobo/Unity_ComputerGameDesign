@@ -289,4 +289,5 @@ Scrollbar 组件包含以下几个关键属性：
 > 3. 为Panel添加Mask组件。
 >
 > 最终效果如下：
+>
 > ![Scoller Text](./.doc/3-8.png)
